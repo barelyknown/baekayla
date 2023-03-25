@@ -104,11 +104,13 @@
     function generateGallery() {
       const galleryContainer = document.getElementById('galleryContainer');
       shuffleArray(images);
+      const minWidth = 250;
+      const maxWidth = 500;
       images.forEach(image => {
         const frameImage = getRandomFrame();
         const frameWidth = frameImage.width;
         const frameHeight = frameImage.height;
-        const galleryItemWidth = 180 + Math.floor(Math.random() * 400);
+        const galleryItemWidth = minWidth + Math.floor(Math.random() * (maxWidth - minWidth));
         const galleryItemHeight = galleryItemWidth * (frameHeight / frameWidth);
 
         const galleryItem = document.createElement('div');
