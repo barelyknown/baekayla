@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Old Fashioned Gallery Wall</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background-image: url('images/wallpaper.jpg');
+    background-repeat: repeat;
+  }
+
+  .gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+  }
+
+  .gallery-item {
+    position: relative;
+    margin: 20px;
+    overflow: hidden;
+  }
+
+  .img-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    overflow: hidden; /* Hide the parts of the image that don't fit */
+  }
+
+  .gallery-item img {
+    max-width: 100%;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  .frame-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  .frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* 338 x 368 */
+</style>
+</head>
+<body>
+  <div class="gallery-container" id="galleryContainer"></div>
+
+  <script>
+    // Your collection of gallery images
+    const imageCount = 18;
+    const images = [];
+    for (let i = 1; i <= imageCount; i++) {
+      images.push(`images/photos/kayla-${i}.jpg`);
+    }
+
+    const frames = [
+      {
+        src: 'images/frames/frame-1.png',
+        width: 600,
+        height: 620,
+      },
+      {
+        src: 'images/frames/frame-2.png',
+        width: 1071,
+        height: 1295,
+      }
+    ]
+
+    function getRandomFrame() {
+      const randomIndex = Math.floor(Math.random() * frames.length);
+      return frames[randomIndex];
+    }
+
+    function generateGallery() {
+      const galleryContainer = document.getElementById('galleryContainer');
+      images.forEach(image => {
+        const frameImage = getRandomFrame();
+        const frameWidth = frameImage.width;
+        const frameHeight = frameImage.height;
+        const galleryItemWidth = 180 + Math.floor(Math.random() * 400);
+        const galleryItemHeight = galleryItemWidth * (frameHeight / frameWidth);
+
+        const galleryItem = document.createElement('div');
+        galleryItem.classList.add('gallery-item');
+        galleryItem.style.width = `${galleryItemWidth}px`;
+        galleryItem.style.height = `${galleryItemHeight}px`;
+
+        const imgContainer = document.createElement('div');
+        imgContainer.classList.add('img-container');
+        galleryItem.appendChild(imgContainer);
+
+        const img = document.createElement('img');
+        img.src = image;
+        imgContainer.appendChild(img);
+
+        const frameWrapper = document.createElement('div');
+        frameWrapper.classList.add('frame-wrapper');
+        galleryItem.appendChild(frameWrapper);
+
+        const frame = document.createElement('img');
+        frame.src = frameImage.src;
+        frame.classList.add('frame');
+        frameWrapper.appendChild(frame);
+
+        galleryContainer.appendChild(galleryItem);
+      });
+    }
+
+    generateGallery();
+  </script>
+</body>
+</html>
