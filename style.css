@@ -147,13 +147,13 @@ input[type="submit"]:hover {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: end;
   padding: 50px 15px 150px;
 }
 
 .gallery-item {
   position: relative;
-  margin: 5px;
+  margin: 7px 5px;
   overflow: hidden;
 }
 

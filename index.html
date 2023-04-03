@@ -229,6 +229,8 @@
       }
     }
 
+    let windowWidth = window.innerWidth;
+
     function generateGallery() {
       const galleryContainer = document.getElementById('galleryContainer');
       // shuffleArray(images);
@@ -238,7 +240,7 @@
         const frameImage = image.orientation === 'portrait' ? frames[1] : frames[0];
         const frameWidth = frameImage.width;
         const frameHeight = frameImage.height;
-        const galleryItemWidth = minWidth + Math.floor(Math.random() * (maxWidth - minWidth));
+        const galleryItemWidth =  minWidth + Math.floor(Math.random() * (maxWidth - minWidth));
         const galleryItemHeight = galleryItemWidth * (frameHeight / frameWidth);
 
         const galleryItem = document.createElement('div');
