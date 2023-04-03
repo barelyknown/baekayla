@@ -14,12 +14,21 @@
         event.preventDefault(); // Prevent form from submitting in the default way
         const textarea = document.getElementById("approach");
         const reply = document.getElementById("reply");
+        const sentMessage = document.getElementById("sent-message");
         const sendBtn = document.getElementById("send-btn");
+        const processingMessage = document.getElementById("processing-message");
+
+        const value = textarea.value;
 
         // Prepare JSON body
         const jsonBody = {
-          "approach": textarea.value
+          "approach": value
         };
+
+        sentMessage.innerText = value;
+        sentMessage.style.display = "inline-block";
+
+        textarea.value = "";
 
         // Disable the form and show a loading message
         textarea.disabled = true;
@@ -27,6 +36,7 @@
         // disable native html input
         sendBtn.disabled = true;
         sendBtn.value = "💌 Sending...";
+        processingMessage.innerText = "Kayla is typing...";
 
         // POST request to the web service
         fetch('https://overtures-ib5kzwprfq-uc.a.run.app/', {
@@ -41,18 +51,20 @@
             response.json().then(data => {
               console.log(data);
               reply.innerText = data.reply;
+              
+              // Re-enable the form
+              textarea.disabled = false;
+              sendBtn.disabled = false;
+              sendBtn.innerText = "💌 Send";
             });
           } else {
             reply.innerText = "Hmm... something went wrong. Try again.";
           }
 
-          // Re-enable the form
-          textarea.disabled = false;
-          sendBtn.disabled = false;
-          sendBtn.innerText = "💌 Send";
         })
         .catch(error => {
           reply.innerText = 'Error: ' + error;
+          textarea.value = value;
         });
     }
   </script>
@@ -63,6 +75,9 @@
   <div id="form-wrapper">
     <div id="couch"></div>
     <form class="form" id="myForm" onsubmit="submitForm(event)">
+      <p id="sent-message">
+      </p>
+      <p id="processing-message"></p>
       <p id="reply"></p>
       <textarea placeholder="Start a conversation" id="approach" rows="6" cols="50"></textarea>
       <br>
@@ -73,10 +88,121 @@
   <script>
     // Your collection of gallery images
     const imageCount = 18;
-    const images = [];
-    for (let i = 1; i <= imageCount; i++) {
-      images.push(`images/photos/kayla-${i}.jpg`);
-    }
+    // for (let i = 1; i <= imageCount; i++) {
+    //   images.push(`images/photos/kayla-${i}.jpg`);
+    // }
+
+    const images = [
+      {
+        src: 'images/photos/kayla-1.jpg',
+        width: 510,
+        height: 640,
+        orientation: 'portrait',
+      },
+      {
+        src: 'images/photos/kayla-2.jpg',
+        width: 1071,
+        height: 1295,
+        orientation: 'landscape',
+      },
+      {
+        src: 'images/photos/kayla-3.jpg',
+        width: 1071,
+        height: 1295,
+        orientation: 'portrait',
+      },
+      {
+        src: 'images/photos/kayla-4.jpg',
+        width: 1071,
+        height: 1295,
+        orientation: 'portrait',
+      },
+      {
+        src: 'images/photos/kayla-5.jpg',
+        width: 1071,
+        height: 1295,
+        orientation: 'portrait',
+      },
+      {
+        src: 'images/photos/kayla-6.jpg',
+        width: 1071,
+        height: 1295,
+        orientation: 'portrait',
+      },
+      {
+        src: 'images/photos/kayla-7.jpg',
+        width: 1071,
+        height: 1295,
+        orientation: 'portrait',
+      },
+      {
+        src: 'images/photos/kayla-8.jpg',
+        width: 1071,
+        height: 1295,
+        orientation: 'portrait',
+      },
+      {
+        src: 'images/photos/kayla-9.jpg',
+        width: 1071,
+        height: 1295,
+        orientation: 'portrait',
+      },
+      {
+        src: 'images/photos/kayla-10.jpg',
+        width: 1071,
+        height: 1295,
+        orientation: 'landscape',
+      },
+      {
+        src: 'images/photos/kayla-11.jpg',
+        width: 1071,
+        height: 1295,
+        orientation: 'portrait',
+      },
+      {
+        src: 'images/photos/kayla-12.jpg',
+        width: 1071,
+        height: 1295,
+        orientation: 'landscape',
+      },
+
+      {
+        src: 'images/photos/kayla-13.jpg',
+        width: 1071,
+        height: 1295,
+        orientation: 'portrait',
+      },
+      {
+        src: 'images/photos/kayla-14.jpg',
+        width: 1071,
+        height: 1295,
+        orientation: 'portrait',
+      },
+      {
+        src: 'images/photos/kayla-15.jpg',
+        width: 1071,
+        height: 1295,
+        orientation: 'portrait',
+      },
+      {
+        src: 'images/photos/kayla-16.jpg',
+        width: 1071,
+        height: 1295,
+        orientation: 'portrait',
+      },
+      {
+        src: 'images/photos/kayla-17.jpg',
+        width: 1071,
+        height: 1295,
+        orientation: 'portrait',
+      },
+      {
+        src: 'images/photos/kayla-18.jpg',
+        width: 1071,
+        height: 1295,
+        orientation: 'landscape',
+      }
+    ]
 
     const frames = [
       {
@@ -105,11 +231,11 @@
 
     function generateGallery() {
       const galleryContainer = document.getElementById('galleryContainer');
-      shuffleArray(images);
+      // shuffleArray(images);
       const minWidth = 250;
       const maxWidth = 500;
       images.forEach(image => {
-        const frameImage = getRandomFrame();
+        const frameImage = image.orientation === 'portrait' ? frames[1] : frames[0];
         const frameWidth = frameImage.width;
         const frameHeight = frameImage.height;
         const galleryItemWidth = minWidth + Math.floor(Math.random() * (maxWidth - minWidth));
@@ -125,7 +251,7 @@
         galleryItem.appendChild(imgContainer);
 
         const img = document.createElement('img');
-        img.src = image;
+        img.src = image.src;
         imgContainer.appendChild(img);
 
         const frameWrapper = document.createElement('div');
