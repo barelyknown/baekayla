@@ -19,8 +19,10 @@
       align-items: center;
     }
 
-    p {
-      text-align: center;
+    #reply {
+      width: 100%;
+      font-size: 16px;
+      padding: 10px;
     }
 
     #approach {
@@ -51,6 +53,9 @@
 
     @media screen and (min-width: 768px) {
       #approach {
+        width: 50%;
+      }
+      #reply {
         width: 50%;
       }
     }
@@ -112,7 +117,7 @@
     function submitForm(event) {
         event.preventDefault(); // Prevent form from submitting in the default way
         const textarea = document.getElementById("approach");
-        const message = document.getElementById("message");
+        const reply = document.getElementById("reply");
 
         // Prepare JSON body
         const jsonBody = {
@@ -129,13 +134,16 @@
         })
         .then(response => {
           if (response.status === 201) {
-            message.innerText = "We'll see if she's interested!";
+            response.json().then(data => {
+              console.log(data);
+              reply.innerText = data.reply;
+            });
           } else {
-            message.innerText = "Hmm... something went wrong. Try again.";
+            reply.innerText = "Hmm... something went wrong. Try again.";
           }
         })
         .catch(error => {
-            message.innerText = 'Error: ' + error;
+          reply.innerText = 'Error: ' + error;
         });
     }
   </script>
@@ -143,8 +151,8 @@
 <body>
   <div class="gallery-container" id="galleryContainer"></div>
 
-  <p id="message"></p>
   <form id="myForm" onsubmit="submitForm(event)">
+    <p id="reply"></p>
     <textarea id="approach" rows="4" cols="50"></textarea>
     <br>
     <input type="submit" value="Submit">
