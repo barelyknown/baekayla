@@ -36,6 +36,8 @@
         // disable native html input
         sendBtn.disabled = true;
         sendBtn.value = "💌 Sending...";
+
+        processingMessage.style.display = "block";
         processingMessage.innerText = "Kayla is typing...";
 
         // POST request to the web service
@@ -49,13 +51,17 @@
         .then(response => {
           if (response.status === 201) {
             response.json().then(data => {
-              console.log(data);
               reply.innerText = data.reply;
+              reply.style.display = "block";
               
+              // hide processing message
+              processingMessage.innerText = "";
+              processingMessage.style.display = "none";
+
               // Re-enable the form
               textarea.disabled = false;
               sendBtn.disabled = false;
-              sendBtn.innerText = "💌 Send";
+              sendBtn.value = "💌 Send";
             });
           } else {
             reply.innerText = "Hmm... something went wrong. Try again.";

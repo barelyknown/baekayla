@@ -51,14 +51,18 @@ body {
 }
 
 #form-wrapper {
-  display: flex;
-  
-  padding: 0 50px;
+  padding: 0 20px;
+}
+
+@media (min-width: 768px) {
+  #form-wrapper {
+    display: flex;
+    padding: 0 50px;
+  }
 }
 
 .form {
   display: flex;
-  margin-left: 20px;
   margin-top: 25px;
   flex-direction: column;
   align-items: center;
@@ -74,12 +78,12 @@ body {
   margin-top: -115px;
 }
 
+
+
 /* Breakpoint for screens smaller than 768px (e.g., mobile devices) */
 @media (max-width: 767px) {
   #couch {
-      width: 400px;
-      height: 209px;
-      background-size: 400px 209px;
+    width: 100%;
   }
 }
 
@@ -230,9 +234,39 @@ input[type="submit"]:hover {
   border-right: 10px solid #ecdde0; /* change border-right to create an arrow pointing to the right */
 }
 
+#reply {
+  position: relative;
+  display: none;
+  padding: 10px 15px;
+  margin: 5px 0;
+  border-radius: 15px;
+  background-color: #f4edeb;
+  color: #773a4c;
+  font-family: sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  max-width: 80%;
+  word-wrap: break-word;
+  width: 100%;
+  box-shadow: 0px 1px 3px #b675958c;
+  text-align: left;
+}
+
+#reply::before {
+  content: '';
+  position: absolute;
+  top: 10px; /* adjust this value to move the arrow up or down */
+  right: -10px; /* move the arrow to the right side */
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 10px solid #f0f0f0;
+}
+
 #processing-message {
   width: 80%;
-  margin: 10px 0 0;
+  margin: 10px 0;
   color: #7a5c67;
   font-style: italic;
 }
