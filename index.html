@@ -5,17 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>baekayla.com</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com"> 
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital@0;1&display=swap" rel="stylesheet">
 
   <script>
     function submitForm(event) {
         event.preventDefault(); // Prevent form from submitting in the default way
         const textarea = document.getElementById("approach");
         const reply = document.getElementById("reply");
+        const sendBtn = document.getElementById("send-btn");
 
         // Prepare JSON body
         const jsonBody = {
           "approach": textarea.value
         };
+
+        // Disable the form and show a loading message
+        textarea.disabled = true;
+
+        // disable native html input
+        sendBtn.disabled = true;
+        sendBtn.value = "💌 Sending...";
 
         // POST request to the web service
         fetch('https://overtures-ib5kzwprfq-uc.a.run.app/', {
@@ -34,6 +45,11 @@
           } else {
             reply.innerText = "Hmm... something went wrong. Try again.";
           }
+
+          // Re-enable the form
+          textarea.disabled = false;
+          sendBtn.disabled = false;
+          sendBtn.innerText = "💌 Send";
         })
         .catch(error => {
           reply.innerText = 'Error: ' + error;
@@ -48,9 +64,9 @@
     <div id="couch"></div>
     <form class="form" id="myForm" onsubmit="submitForm(event)">
       <p id="reply"></p>
-      <textarea id="approach" rows="6" cols="50"></textarea>
+      <textarea placeholder="Start a conversation" id="approach" rows="6" cols="50"></textarea>
       <br>
-      <input type="submit" value="Submit">
+      <input type="submit" value="💌 Send" id="send-btn">
     </form>
   </div>
 

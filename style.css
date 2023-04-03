@@ -74,6 +74,24 @@ body {
   margin-top: -115px;
 }
 
+/* Breakpoint for screens smaller than 768px (e.g., mobile devices) */
+@media (max-width: 767px) {
+  #couch {
+      width: 400px;
+      height: 209px;
+      background-size: 400px 209px;
+  }
+}
+
+/* Breakpoint for screens between 768px and 1024px (e.g., tablets) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  #couch {
+      width: 600px;
+      height: 314px;
+      background-size: 600px 314px;
+  }
+}
+
 #reply {
   width: 100%;
   font-size: 16px;
@@ -82,28 +100,43 @@ body {
 
 #approach {
   width: 100%;
-  padding: 10px;
+  font-family: Lora, Arial, sans-serif;
+  padding: 15px 20px;
   box-sizing: border-box;
   font-size: 18px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid #d49ea7;
+  border-radius: 6px;
   resize: vertical;
   margin-bottom: 10px;
+  outline: none;
+  transition: border-color 0.3s ease-in-out; /* Optional: Add a smooth transition effect */
+}
+
+#approach:focus {
+  border-color: #ff69b4; /* Change the border color to a nice pink on focus */
+}
+
+#approach::placeholder {
+  font-style: italic; /* Make the placeholder text italic */
+  color: #dac3cc; /* A light faded pink color */
 }
 
 input[type="submit"] {
   background-color: #FFC0CB;
   color: white;
-  padding: 10px 24px;
-  font-size: 16px;
+  padding: 7px 15px;
+  font-size: 18px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   margin-bottom: 40px;
+  background-color:#fcf4f5;
+  font-weight: bold;
+  color: #D47B5C;
 }
 
 input[type="submit"]:hover {
-  background-color: #FFB6C1;
+  background-color: #ffdae0;
 }
 
 .gallery-container {
