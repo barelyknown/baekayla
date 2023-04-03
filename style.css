@@ -63,12 +63,12 @@ body {
 }
 
 #couch {
-  background-image: url('images/couch.png');
+  background-image: url('images/couch-1.png');
   background-repeat: no-repeat;
   width: 800px;
   height: 418px;
   background-size: 800px 418px;
-  flex: 1;
+  flex: none;
 }
 
 #reply {
