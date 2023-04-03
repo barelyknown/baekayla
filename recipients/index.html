@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Recipients for Baekayla.com</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f3f3f3;
+    }
+
+    h1 {
+      text-align: center;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    form {
+      width: 400px;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 400px;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #d9d9d9;
+      border-radius: 5px;
+      resize: none;
+    }
+
+    textarea:focus {
+      outline: 2px solid #F4C2C2;
+      outline-offset: 2px;
+    }
+
+    #submitButton {
+      background-color: #FFC0CB;
+      color: #ffffff;
+      font-weight: 600;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #submitButton:hover {
+      background-color: #FFB6C1;
+    }
+
+    #submitButton:disabled {
+      background-color: #FFD1DC;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <form id="emailForm">
+    <h1>Email Recipients</h1>
+    <textarea id="emailTextarea" placeholder="Loading..." disabled></textarea>
+    <button type="button" id="submitButton" disabled>Update Recipients</button>
+  </form>
+
+  <script>
+    async function fetchInitialData() {
+      const response = await fetch("https://recipients-1-ib5kzwprfq-uc.a.run.app");
+      if (response.ok) {
+        const data = await response.text();
+        document.getElementById("emailTextarea").value = data;
+        document.getElementById("emailTextarea").disabled = false;
+        document.getElementById("submitButton").disabled = false;
+      } else {
+        alert("An error occurred while fetching initial data.");
+      }
+    }
+
+    fetchInitialData();
+
+    document.getElementById("submitButton").addEventListener("click", async function() {
+      document.getElementById("emailTextarea").disabled = true;
+      document.getElementById("submitButton").disabled = true;
+      const emailData = document.getElementById("emailTextarea").value;
+      const response = await fetch("https://recipients-1-ib5kzwprfq-uc.a.run.app", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "text/plain",
+        },
+        body: emailData,
+      });
+
+      document.getElementById("emailTextarea").disabled = false;
+      document.getElementById("submitButton").disabled = false;
+
+      if (!response.ok) {
+        alert("An error occurred while updating the recipients.");
+      }
+    });
+  </script>
+</body>
+</html>
