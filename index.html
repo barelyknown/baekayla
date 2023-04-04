@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com"> 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
   <script>
     function submitForm(event) {
@@ -29,6 +29,8 @@
         sentMessage.style.display = "inline-block";
 
         textarea.value = "";
+        // set the textarea placeholder value
+        textarea.placeholder = "…";
 
         // Disable the form and show a loading message
         textarea.disabled = true;
@@ -62,6 +64,7 @@
               textarea.disabled = false;
               sendBtn.disabled = false;
               sendBtn.value = "💌 Send";
+              textarea.placeholder = "Add a response!";
             });
           } else {
             reply.innerText = "Hmm... something went wrong. Try again.";
@@ -81,13 +84,17 @@
   <div id="form-wrapper">
     <div id="couch"></div>
     <form class="form" id="myForm" onsubmit="submitForm(event)">
-      <p id="sent-message">
+      <p id="initial" class="message kayla-message">
+        Hey there! <b>I'm Kayla</b>. I'm a 26 year old from Kansas, smart, fun, successful person but I suck at dating. I'm looking for a life partner who is kind, loving, family oriented and has a good sense of humour. 
+      </p>
+      <p id="sent-message" class="message reply-message">
       </p>
       <p id="processing-message"></p>
-      <p id="reply"></p>
-      <textarea placeholder="Start a conversation" id="approach" rows="6" cols="50"></textarea>
-      <br>
-      <input type="submit" value="💌 Send" id="send-btn">
+      <p id="reply" class="message kayla-message"></p>
+      <div style="position: relative; margin-bottom: 40px;">
+        <textarea placeholder="Go ahead, ask me out!" id="approach" rows="6" cols="50"></textarea>
+        <input type="submit" value="💌 Send" id="send-btn">
+      </div>
     </form>
   </div>
 

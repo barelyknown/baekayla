@@ -43,6 +43,10 @@ table {
     border-spacing: 0;
 }
 
+b {
+  font-weight: bold;
+}
+
 body {
   font-family: Arial, sans-serif;
   background-color: #E8CEC5;
@@ -130,12 +134,11 @@ body {
 input[type="submit"] {
   background-color: #FFC0CB;
   color: white;
-  padding: 7px 15px;
+  padding: 10px 20px;
   font-size: 18px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-bottom: 40px;
   background-color:#fcf4f5;
   font-weight: bold;
   color: #D47B5C;
@@ -207,15 +210,13 @@ input[type="submit"]:hover {
   height: 100%;
 }
 
-#sent-message {
+.message {
   position: relative;
   display: none;
   padding: 10px 15px;
   margin: 5px 0;
   border-radius: 15px;
-  background-color: #ecdde0;
-  color: #5e444e;
-  font-family: sans-serif;
+  font-family: Lora, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.4;
   max-width: 80%;
@@ -223,43 +224,39 @@ input[type="submit"]:hover {
   width: 100%;
 }
 
-#sent-message::before {
+#initial {
+  display: block;
+}
+
+.message::before {
   content: '';
   position: absolute;
-  top: 10px; /* adjust this value to move the arrow up or down */
-  left: -10px; /* move the arrow to the left side */
   width: 0;
   height: 0;
+  top: 10px; /* adjust this value to move the arrow up or down */
+}
+
+.reply-message {
+  background-color: #ecdde0;
+  color: #5e444e;
+  box-shadow: 0px 1px 3px #b675958c;
+}
+
+.reply-message::before {
+  left: -10px; /* move the arrow to the left side */
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-right: 10px solid #ecdde0; /* change border-right to create an arrow pointing to the right */
 }
 
-#reply {
-  position: relative;
-  display: none;
-  padding: 10px 15px;
-  margin: 5px 0;
-  border-radius: 15px;
+.kayla-message {
   background-color: #f4edeb;
   color: #773a4c;
-  font-family: sans-serif;
-  font-size: 16px;
-  line-height: 1.4;
-  max-width: 80%;
-  word-wrap: break-word;
-  width: 100%;
   box-shadow: 0px 1px 3px #b675958c;
-  text-align: left;
 }
 
-#reply::before {
-  content: '';
-  position: absolute;
-  top: 10px; /* adjust this value to move the arrow up or down */
+.kayla-message::before {
   right: -10px; /* move the arrow to the right side */
-  width: 0;
-  height: 0;
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 10px solid #f0f0f0;
