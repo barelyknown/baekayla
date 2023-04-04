@@ -163,7 +163,7 @@ input[type="submit"]:active {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: end;
+  align-items: center;
   padding: 50px 15px 150px;
 }
 
