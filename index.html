@@ -75,7 +75,7 @@
           reply.innerText = "";
         }
 
-        const value = textarea.value;
+        const value = textarea.value.trim();
         approaches.push(value);
         const approach = approaches.join("\n\n");
 
@@ -352,7 +352,6 @@
     const regex = new RegExp(`\\b(${wordToBold})\\b`, "g");
     const modifiedIntroduction = introduction.replace(regex, "<b>$1</b>");
     initial.innerHTML = modifiedIntroduction;
-    console.log(modifiedIntroduction);
 
     generateGallery();
   </script>
