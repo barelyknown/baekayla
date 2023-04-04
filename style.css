@@ -177,7 +177,6 @@ input[type="submit"]:hover {
 .gallery-item img {
   max-width: 100%;
   max-height: 100%;
-  height: auto;
 }
 
 .gallery-item .img-container img {
