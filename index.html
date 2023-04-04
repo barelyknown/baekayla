@@ -82,7 +82,11 @@
         const sendBtn = document.getElementById("send-btn");
         const processingMessage = document.getElementById("processing-message");
 
-        if (isApproachTooLong(textarea.value)) {
+        const value = textarea.value.trim();
+        approaches.push(value);
+        const approach = approaches.join("\n\n");
+
+        if (isApproachTooLong(approach)) {
           reply.innerText = "Sorry, that's too long. Try again.";
           reply.style.display = "block";
           return;
@@ -90,10 +94,6 @@
           reply.style.display = "none";
           reply.innerText = "";
         }
-
-        const value = textarea.value.trim();
-        approaches.push(value);
-        const approach = approaches.join("\n\n");
 
         // Prepare JSON body
         const jsonBody = {
