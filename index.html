@@ -12,6 +12,11 @@
   <script>
     const approaches = [];
 
+    function isApproachTooLong(text) {
+      const maxChars = 1500;
+      return text.length > maxChars;
+    }
+
     function submitForm(event) {
         event.preventDefault(); // Prevent form from submitting in the default way
         const textarea = document.getElementById("approach");
@@ -20,8 +25,14 @@
         const sendBtn = document.getElementById("send-btn");
         const processingMessage = document.getElementById("processing-message");
 
-        reply.style.display = "none";
-        reply.innerText = "";
+        if (isApproachTooLong(textarea.value)) {
+          reply.innerText = "Sorry, that's too long. Try again.";
+          reply.style.display = "block";
+          return;
+        } else {
+          reply.style.display = "none";
+          reply.innerText = "";
+        }
 
         const value = textarea.value;
         approaches.push(value);
@@ -75,11 +86,13 @@
             });
           } else {
             reply.innerText = "Hmm... something went wrong. Try again.";
+            reply.style.display = "block";
           }
 
         })
         .catch(error => {
           reply.innerText = 'Error: ' + error;
+          reply.style.display = "block";
           textarea.value = value;
         });
     }
